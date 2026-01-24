@@ -9,32 +9,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hiago640.vaxlog.model.Vacina;
-import br.com.hiago640.vaxlog.repository.VacinaRepository;
-import br.com.hiago640.vaxlog.service.VacinaService;
+import br.com.hiago640.vaxlog.dto.AplicacaoRequest;
+import br.com.hiago640.vaxlog.model.RegistroVacina;
+import br.com.hiago640.vaxlog.repository.AplicacaoRepository;
+import br.com.hiago640.vaxlog.service.AplicacaoService;
 
 @RestController
-@RequestMapping("/vacina")
-public class VacinaController {
+@RequestMapping("/aplicacao")
+public class AplicacaoController {
 
 	@Autowired
-	private VacinaRepository repository;
+	private AplicacaoRepository repository;
 	
 	@Autowired
-	private VacinaService service;
+	private AplicacaoService service;
 	
 	@GetMapping("/listar")
-	public List<Vacina> getAll() {
+	public List<RegistroVacina> getAll() {
 		System.out.println("entrou aqui");
 		
 		return repository.findAll();
 	}
 	
 	@PostMapping("/criar")
-	public Vacina incluirVacina(@RequestBody Vacina vacina) {
-		service.salvar(vacina);
+	public AplicacaoRequest incluirVacina(@RequestBody AplicacaoRequest aplicacao) {
+		service.salvar(aplicacao);
 		
-		return vacina;
+		return aplicacao;
 	}
 	
 }
