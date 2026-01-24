@@ -4,14 +4,15 @@ import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Usuario {
 
 	@Id
-	@GeneratedValue(generator = "UUID")
-	private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 	private String nome;
 	private String email;
 	private String password;
@@ -19,18 +20,18 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(UUID id, String nome, String email, String password) {
+	public Usuario(Long id, String nome, String email, String password) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
 	}
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -1,39 +1,35 @@
 package br.com.hiago640.vaxlog.model;
 
-import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Vacina {
-	
+
 	@Id
-	@GeneratedValue(generator = "UUID")
-	private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 	private String nome;
-	private String lote;
-	private LocalDate aplicacao;
-	
+	private String fabricante;
+
 	public Vacina() {
 	}
 
-	public Vacina(UUID id, String nome, String lote, LocalDate aplicacao) {
+	public Vacina(Long id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.lote = lote;
-		this.aplicacao = aplicacao;
 	}
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -45,20 +41,12 @@ public class Vacina {
 		this.nome = nome;
 	}
 
-	public String getLote() {
-		return lote;
+	public String getFabricante() {
+		return fabricante;
 	}
 
-	public void setLote(String lote) {
-		this.lote = lote;
-	}
-
-	public LocalDate getAplicacao() {
-		return aplicacao;
-	}
-
-	public void setAplicacao(LocalDate aplicacao) {
-		this.aplicacao = aplicacao;
+	public void setFabricante(String fabricante) {
+		this.fabricante = fabricante;
 	}
 
 	@Override
@@ -80,7 +68,7 @@ public class Vacina {
 
 	@Override
 	public String toString() {
-		return String.format("Vacina [id=%s, nome=%s, lote=%s, aplicacao=%s]", id, nome, lote, aplicacao);
+		return String.format("Vacina [id=%s, nome=%s, fabricante=%s]", id, nome, fabricante);
 	}
 
 }
