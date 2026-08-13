@@ -23,14 +23,14 @@ public class UsuarioController {
 	private UsuarioService service;
 
 	@GetMapping
-	public ResponseEntity<List<UserResponseDTO>> listarTodos() {
+	public ResponseEntity<List<UserResponseDTO>> getAll() {
 		List<UserResponseDTO> usuarios = service.listarTodos();
 		
 		return ResponseEntity.ok(usuarios);
 	}
 
 	@PostMapping
-	public ResponseEntity<UserResponseDTO> criar(@RequestBody UserRequestDTO dto) {
+	public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO dto) {
 		UserResponseDTO response = service.salvar(dto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
