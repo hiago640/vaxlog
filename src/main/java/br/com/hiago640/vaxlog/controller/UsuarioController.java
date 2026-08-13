@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.hiago640.vaxlog.dto.CreateUserDTO;
+import br.com.hiago640.vaxlog.dto.UserRequestDTO;
 import br.com.hiago640.vaxlog.dto.UserResponseDTO;
 import br.com.hiago640.vaxlog.service.UsuarioService;
 
@@ -30,7 +30,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserResponseDTO> criar(@RequestBody CreateUserDTO dto) {
+	public ResponseEntity<UserResponseDTO> criar(@RequestBody UserRequestDTO dto) {
 		UserResponseDTO response = service.salvar(dto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);

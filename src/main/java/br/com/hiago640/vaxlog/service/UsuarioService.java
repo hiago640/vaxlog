@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.hiago640.vaxlog.dto.CreateUserDTO;
+import br.com.hiago640.vaxlog.dto.UserRequestDTO;
 import br.com.hiago640.vaxlog.dto.UserResponseDTO;
 import br.com.hiago640.vaxlog.mapper.UsuarioMapper;
 import br.com.hiago640.vaxlog.model.Usuario;
@@ -26,7 +26,7 @@ public class UsuarioService {
 	private UsuarioMapper mapper;
 
 	@Transactional
-	public UserResponseDTO salvar(CreateUserDTO dto) {
+	public UserResponseDTO salvar(UserRequestDTO dto) {
 		LOGGER.trace("Entrou em salvarUsuario");
 		LOGGER.debug("Usuario recebido: {}", dto);
 
@@ -38,13 +38,15 @@ public class UsuarioService {
 	}
 
 	@Transactional
-	public void alterar(Usuario usuario) {
+	public UserResponseDTO alterar(UserRequestDTO dto) {
 		LOGGER.trace("Entrou em alterarUsuario");
-		LOGGER.debug("Usuario recebido: {}", usuario);
+		LOGGER.debug("Usuario recebido: {}", dto);
 
-		repository.save(usuario);
+		Usuario usuario = mapper.toEntity(dto);
+		Usuario salvo = repository.save(usuario);
 
 		LOGGER.debug("Usuario alterado com sucesso: {}", usuario);
+		return mapper.toResponse(salvo);
 	}
 
 	@Transactional
