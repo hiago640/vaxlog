@@ -1,5 +1,6 @@
 package br.com.hiago640.vaxlog.model;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,8 +20,12 @@ public class Usuario {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+	
+	@Nonnull
 	private String nome;
+	@Nonnull
 	private String email;
+	@Nonnull
 	private String password;
 
 	@Override
