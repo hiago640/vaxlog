@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.hiago640.vaxlog.dto.VacinaRequestDTO;
 import br.com.hiago640.vaxlog.dto.VacinaResponseDTO;
+import br.com.hiago640.vaxlog.exception.custom.VaccineNotFoundException;
 import br.com.hiago640.vaxlog.mapper.VacinaMapper;
 import br.com.hiago640.vaxlog.model.Vacina;
 import br.com.hiago640.vaxlog.repository.VacinaRepository;
@@ -38,24 +39,34 @@ public class VacinaService {
 	}
 
 	@Transactional
-	public void alterar(VacinaRequestDTO dto) {
+	public VacinaResponseDTO alterar(Long id, VacinaRequestDTO dto) {
 		LOGGER.trace("Entrou em alterarVacina");
-		LOGGER.debug("Vacina recebida: {}", dto);
+		LOGGER.debug("ID recebido: {}, DTO: {}", id, dto);
+
+		if (!repository.existsById(id)) {
+			throw new VaccineNotFoundException();
+		}
 
 		Vacina vacina = mapper.toEntity(dto);
-		repository.save(vacina);
+		vacina.setId(id);
 
-		LOGGER.debug("Vacina alterada com sucesso: {}", vacina);
+		Vacina salvo = repository.save(vacina);
+
+		LOGGER.debug("Vacina alterada com sucesso: {}", salvo);
+		return mapper.toResponse(salvo);
 	}
 
 	@Transactional
-	public void excluir(Vacina vacina) {
+	public void excluir(Long id) {
 		LOGGER.trace("Entrou em excluirVacina");
-		LOGGER.debug("Vacina recebida: {}", vacina);
+		LOGGER.debug("ID recebido para exclusão: {}", id);
 
-		repository.delete(vacina);
+		if (!repository.existsById(id)) {
+			throw new VaccineNotFoundException();
+		}
 
-		LOGGER.debug("Vacina removida com sucesso: {}", vacina);
+		repository.deleteById(id);
+		LOGGER.debug("Vacina removida com sucesso. ID: {}", id);
 	}
 
 	public List<VacinaResponseDTO> listarTodos() {
