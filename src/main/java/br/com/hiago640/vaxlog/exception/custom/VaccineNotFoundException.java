@@ -1,6 +1,8 @@
 package br.com.hiago640.vaxlog.exception.custom;
 
-public class VaccineNotFoundException extends RuntimeException{
+import jakarta.persistence.EntityNotFoundException;
+
+public class VaccineNotFoundException extends EntityNotFoundException {
 
 	private static final long serialVersionUID = 1275635155022317431L;
 

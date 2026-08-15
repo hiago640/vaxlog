@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hiago640.vaxlog.dto.RegistroVacinaRequestDTO;
 import br.com.hiago640.vaxlog.dto.RegistroVacinaResponseDTO;
 import br.com.hiago640.vaxlog.service.RegistroVacinaService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/vaccine-record")
@@ -46,7 +47,7 @@ public class RegistroVacinaController {
 
 	@PostMapping
 	public ResponseEntity<RegistroVacinaResponseDTO> createVaccineRecord(
-			@RequestBody RegistroVacinaRequestDTO aplicacao) {
+			@Valid @RequestBody RegistroVacinaRequestDTO aplicacao) {
 		RegistroVacinaResponseDTO response = service.salvar(aplicacao);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -54,7 +55,7 @@ public class RegistroVacinaController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<RegistroVacinaResponseDTO> updateVaccineRecord(@PathVariable Long id,
-			@RequestBody RegistroVacinaRequestDTO dto) {
+			@Valid @RequestBody RegistroVacinaRequestDTO dto) {
 		RegistroVacinaResponseDTO response = service.alterar(id, dto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);

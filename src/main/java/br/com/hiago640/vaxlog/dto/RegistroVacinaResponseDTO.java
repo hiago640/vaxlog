@@ -11,6 +11,5 @@ public record RegistroVacinaResponseDTO(
     DoseEnum dose,
 	LocalDate dataAplicacao, 
 	String estabelecimento, 
-	String lote, 
 	String observacao) {
 }

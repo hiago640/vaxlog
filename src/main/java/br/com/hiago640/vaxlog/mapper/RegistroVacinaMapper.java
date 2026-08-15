@@ -14,8 +14,6 @@ import br.com.hiago640.vaxlog.model.Vacina;
 public interface RegistroVacinaMapper {
 
 	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "usuario", source = "usuario")
-	@Mapping(target = "vacina", source = "vacina")
 	@Mapping(target = "dose", source = "dto.dose")
 	RegistroVacina toEntity(RegistroVacinaRequestDTO dto, Usuario usuario, Vacina vacina);
 

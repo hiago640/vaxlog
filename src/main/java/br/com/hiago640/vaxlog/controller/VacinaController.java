@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hiago640.vaxlog.dto.VacinaRequestDTO;
 import br.com.hiago640.vaxlog.dto.VacinaResponseDTO;
 import br.com.hiago640.vaxlog.service.VacinaService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/vaccine")
@@ -33,14 +34,14 @@ public class VacinaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<VacinaResponseDTO> createVaccine(@RequestBody VacinaRequestDTO vacina) {
+	public ResponseEntity<VacinaResponseDTO> createVaccine(@Valid @RequestBody VacinaRequestDTO vacina) {
 		VacinaResponseDTO response = service.salvar(vacina);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<VacinaResponseDTO> updateVaccine(@PathVariable Long id, @RequestBody VacinaRequestDTO vacina) {
+	public ResponseEntity<VacinaResponseDTO> updateVaccine(@PathVariable Long id, @Valid @RequestBody VacinaRequestDTO vacina) {
 		VacinaResponseDTO response = service.alterar(id, vacina);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);

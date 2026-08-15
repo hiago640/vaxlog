@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.hiago640.vaxlog.dto.UserRequestDTO;
 import br.com.hiago640.vaxlog.dto.UserResponseDTO;
 import br.com.hiago640.vaxlog.service.UsuarioService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -33,14 +34,14 @@ public class UsuarioController {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO dto) {
+	public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO dto) {
 		UserResponseDTO response = service.salvar(dto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO dto) {
+	public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO dto) {
 		UserResponseDTO response = service.alterar(id, dto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);

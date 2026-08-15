@@ -1,6 +1,7 @@
 package br.com.hiago640.vaxlog.model;
 
-import jakarta.annotation.Nonnull;
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,16 +19,17 @@ import lombok.Setter;
 public class Vacina {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	@Nonnull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String nome;
-	@Nonnull
 	private String fabricante;
+	private String lote;
+	private LocalDate dataValidade;
 
 	@Override
 	public String toString() {
-		return String.format("Vacina [id=%s, nome=%s, fabricante=%s]", id, nome, fabricante);
+		return String.format("Vacina [id=%s, nome=%s, fabricante=%s, lote=%s, dataValidade=%s]", id, nome, fabricante,
+				lote, dataValidade);
 	}
 
 }
